@@ -33,13 +33,13 @@ To run this project locally, follow these steps:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/mnist-cnn-streamlit.git
+   git clone https://github.com/sayedgamal99/Digit-Recognizer-APP.git
    ```
 
 2. **Navigate into the project directory**:
 
    ```bash
-   cd mnist-cnn-streamlit
+   cd Digit-Recognizer-APP
    ```
 
 3. **Install the required dependencies**:
