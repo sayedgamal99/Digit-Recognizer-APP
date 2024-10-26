@@ -5,31 +5,41 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-model = load_model('model/best_model.keras')
+# Load the pre-trained MNIST model
+model = load_model('model/best_model_v2.keras')
 
 def preprocess_image(image):
-    image = image.convert('L')  
+    image = image.convert('L')  # Convert to grayscale
     image = image.resize((28, 28))  # Resize to match MNIST dimensions
     image = np.array(image)
-    image = image.reshape(28, 28, 1)  # Add batch dimension
+    image = image.reshape(1, 28, 28, 1)  # Add batch dimension
     return image
 
 # Streamlit app layout
-st.title('MNIST Digit Classification using CNN')
+st.title('MNIST Digit Classification: Upload or Take Picture')
 
-uploaded_file = st.file_uploader("Upload a handwritten digit image", type=["jpg", "png", "jpeg"])
+# Choice between upload and camera
+image_source = st.selectbox("Choose image source:", ("Upload Image", "Take Picture"))
 
-if uploaded_file is not None:
-    image = Image.open(uploaded_file)
-    st.image(image, caption='Uploaded Image', use_column_width=True)
+if image_source == "Upload Image":
+    uploaded_file = st.file_uploader("Upload a handwritten digit image", type=["jpg", "png", "jpeg"])
 
-    # Preprocess the image and predict the class
-    processed_image = preprocess_image(image)
-    prediction = model.predict(processed_image)
-    predicted_class = np.argmax(prediction, axis=1)[0]
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        st.image(image, caption='Uploaded Image', use_column_width=True)
 
-    st.write(f"Predicted Digit: {predicted_class}")
-    
-    st.write("Confidence Scores:")
-    st.bar_chart(prediction[0])
+        # Preprocess and predict
+        processed_image = preprocess_image(image)
+        prediction = model.predict(processed_image)
+        predicted_class = np.argmax(prediction, axis=1)[0]
+
+        st.write(f"Predicted Digit: {predicted_class}")
+        st.write("Confidence Scores:")
+        st.bar_chart(prediction[0])
+
+elif image_source == "Take Picture":
+    # Note: Browser security restrictions prevent direct webcam access in Streamlit
+    st.warning("Webcam access is currently not supported in Streamlit due to security constraints. As an alternative, you can upload an image from your device.")
+
+else:
+    st.error("Invalid image source selection.")
