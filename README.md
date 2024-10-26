@@ -24,7 +24,7 @@ The Streamlit application provides a user-friendly interface that allows users t
 
 ## Installation and Usage
 
-- You can use the app directly via <font size=4>[Streamlit Hub](https://digit-recognizer-app-2vttsjj9haryx4mn2bvcrv.streamlit.app/)</font>
+- You can use the app directly via <font size=4>[Streamlit Hub](https://digit-recognizer-app-er4ydd5ahxeqd8mbgp9esz.streamlit.app/)</font>
 
 <br>
 
