@@ -24,6 +24,10 @@ The Streamlit application provides a user-friendly interface that allows users t
 
 ## Installation and Usage
 
+- You can use the app directly via <font size=4>[Streamlit Hub](digit-recognizer-app-2vttsjj9haryx4mn2bvcrv)</font>
+
+<br>
+
 To run this project locally, follow these steps:
 
 1. **Clone the repository**:
