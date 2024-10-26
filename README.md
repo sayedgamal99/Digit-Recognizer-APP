@@ -58,6 +58,7 @@ Once the app is running, open your web browser and go to the URL provided in the
 ## Project Structure
 
 - `app.py`: The main Streamlit application script for digit classification.
-- `model/`: Contains the pre-trained CNN model file (`mnist_cnn_model.keras`).
+- `model/`: Contains the trained CNN model file (`best_modelvx.keras`).
+- `mnist-using-cnns-with-data-augmentation-99% Accuracy.ipynb`: contains the development notebook producing the trained model.
 - `requirements.txt`: Lists all Python packages required to run the application.
 - `README.md`: Documentation for the project.
