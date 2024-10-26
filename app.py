@@ -38,8 +38,20 @@ if image_source == "Upload Image":
         st.bar_chart(prediction[0])
 
 elif image_source == "Take Picture":
-    # Note: Browser security restrictions prevent direct webcam access in Streamlit
-    st.warning("Webcam access is currently not supported in Streamlit due to security constraints. As an alternative, you can upload an image from your device.")
+    # Capture image from the webcam
+    image_file = st.camera_input("Take a picture of a handwritten digit")
 
+    if image_file is not None:
+        image = Image.open(image_file)
+        st.image(image, caption='Captured Image', use_column_width=True)
+
+        # Preprocess and predict
+        processed_image = preprocess_image(image)
+        prediction = model.predict(processed_image)
+        predicted_class = np.argmax(prediction, axis=1)[0]
+
+        st.write(f"Predicted Digit: {predicted_class}")
+        st.write("Confidence Scores:")
+        st.bar_chart(prediction[0])
 else:
     st.error("Invalid image source selection.")
