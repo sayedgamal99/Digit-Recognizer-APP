@@ -9,6 +9,10 @@ import matplotlib.pyplot as plt
 model = load_model('model/best_model_v2.keras')
 
 def preprocess_image(image):
+    if isinstance(image, Image.Image):
+        image = np.array(image)
+
+    # Convert to grayscale if it's a color image
     gray = cv2.cvtColor(
         image, cv2.COLOR_BGR2GRAY) if image.ndim == 3 else image
 
@@ -17,8 +21,9 @@ def preprocess_image(image):
         # Invert the image
         gray = cv2.bitwise_not(gray)
 
-    gray = gray.resize((28, 28))  # Resize to match MNIST dimensions
-    gray = np.array(gray)
+    # Resize to match MNIST dimensions
+    gray = cv2.resize(gray, (28, 28))
+    
     gray = gray.reshape(1, 28, 28, 1)  # Add batch dimension
     return gray
 
