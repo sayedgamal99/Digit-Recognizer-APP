@@ -9,11 +9,17 @@ import matplotlib.pyplot as plt
 model = load_model('model/best_model_v2.keras')
 
 def preprocess_image(image):
-    image = image.convert('L')  # Convert to grayscale
-    image = image.resize((28, 28))  # Resize to match MNIST dimensions
-    image = np.array(image)
-    image = image.reshape(1, 28, 28, 1)  # Add batch dimension
-    return image
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) if img.ndim == 3 else img
+
+    # Check if the background is light (white) or dark (black)
+    if np.mean(gray) > 127:  # Adjust threshold as necessary
+        # Invert the image
+        gray = cv2.bitwise_not(gray)
+
+    gray = gray.resize((28, 28))  # Resize to match MNIST dimensions
+    gray = np.array(gray)
+    gray = gray.reshape(1, 28, 28, 1)  # Add batch dimension
+    return gray
 
 # Streamlit app layout
 st.title('MNIST Digit Classification: Upload or Take Picture')
