@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 model = load_model('model/best_model_v2.keras')
 
 def preprocess_image(image):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) if img.ndim == 3 else img
+    gray = cv2.cvtColor(
+        image, cv2.COLOR_BGR2GRAY) if image.ndim == 3 else image
 
     # Check if the background is light (white) or dark (black)
     if np.mean(gray) > 127:  # Adjust threshold as necessary
