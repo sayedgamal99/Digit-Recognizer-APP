@@ -1,3 +1,6 @@
 [server]
-enableXsrfProtection=false
-enabelCORS=false
+enableXsrfProtection = false
+enableCORS = false
+
+[theme]
+base = "light"
